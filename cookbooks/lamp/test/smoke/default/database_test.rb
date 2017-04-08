@@ -14,6 +14,6 @@ describe port 3306 do
   its('protocols') { should include('tcp') }
 end
 
-describe command("mysql -h 127.0.0.1 -uroot -p fakerootpassword -s -e 'show databases;'") do
+describe command("mysql -h 127.0.0.1 -uroot -pfakerootpassword -s -e 'show databases;'") do
   its('stdout') { should match(/mysql/) }
 end
