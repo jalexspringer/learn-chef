@@ -1,0 +1,39 @@
+---
+driver:
+  name: gce
+  project: protean-bus-122701
+  zone: us-east1-c
+  email: jalexspringer@gmail.com
+  tags:
+    - test-kitchen
+  service_account_scopes:
+    - devstorage.read_write
+    - userinfo.email
+  associate_public_ip: true
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+transport:
+  username: ubuntu
+  ssh_key:
+    - ~/.ssh/google_compute_engine
+
+platforms:
+  - name: ubuntu-14.04
+    driver:
+      username: ubuntu
+      image_project: ubuntu-os-cloud
+      image_family: ubuntu-1404-lts
+
+suites:
+  - name: default
+    run_list:
+      - recipe[lamp::default]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
