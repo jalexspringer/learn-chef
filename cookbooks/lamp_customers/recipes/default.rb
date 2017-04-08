@@ -21,3 +21,12 @@ execute "initialize #{node['lamp']['database']['dbname']} database" do
   command "mysql -h 127.0.0.1 -u #{node['lamp']['database']['admin_username']} -p#{passwords['admin_password']} -D #{node['lamp']['database']['dbname']} < #{create_tables_script_path}"
   not_if  "mysql -h 127.0.0.1 -u #{node['lamp']['database']['admin_username']} -p#{passwords['admin_password']} -D #{node['lamp']['database']['dbname']} -e 'describe customers;'"
 end
+
+# Write the homepage
+template "#node{['lamp']['web']['document_root']}/index.php'" do
+  source "index.php.erb"
+  variables(
+    servername: '127.0.0.1'
+    admin_password: passwords['admin_password']
+  )
+end
