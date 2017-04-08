@@ -26,7 +26,7 @@ end
 template "#node{['lamp']['web']['document_root']}/index.php'" do
   source "index.php.erb"
   variables(
-    servername: '127.0.0.1'
+    servername: '127.0.0.1',
     admin_password: passwords['admin_password']
   )
 end
