@@ -21,3 +21,5 @@ source_url 'https://github.com/jalexspringer/lamp'
 
 depends 'httpd', '~> 0.4'
 depends 'mysql', '~> 8.0'
+depends 'mysql2_chef_gem', '~> 1.1'
+depends 'database', '~> 6.1'
