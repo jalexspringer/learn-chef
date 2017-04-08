@@ -20,3 +20,4 @@ issues_url 'https://github.com/jalexspringer/lamp/issues'
 source_url 'https://github.com/jalexspringer/lamp'
 
 depends 'httpd', '~> 0.4'
+depends 'mysql', '~> 8.0'
