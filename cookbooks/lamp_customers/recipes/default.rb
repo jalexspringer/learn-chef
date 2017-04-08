@@ -23,7 +23,7 @@ execute "initialize #{node['lamp']['database']['dbname']} database" do
 end
 
 # Write the homepage
-template "#{node['lamp']['web']['document_root']}/index.php'" do
+template "#{node['lamp']['web']['document_root']}/index.php" do
   source "index.php.erb"
   variables(
     servername: '127.0.0.1',
