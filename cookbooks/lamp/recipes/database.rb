@@ -36,9 +36,9 @@ mysql_database node['lamp']['database']['dbname'] do
 end
 
 mysql_database_user ['lamp']['database']['admin_username'] do
-  connection mysql_conn_info
-  password   passwords['admin_password']
-  database_name node['lamp']['database']['dbname']
-  host mysql_conn_info['host']
-  action [:create, :grant]
+  connection     mysql_conn_info
+  password       passwords['admin_password']
+  database_name  node['lamp']['database']['dbname']
+  host           '127.0.0.1'
+  action         [:create, :grant]
 end
