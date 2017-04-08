@@ -35,7 +35,7 @@ mysql_database node['lamp']['database']['dbname'] do
   action :create
 end
 
-mysql_database_user ['lamp']['database']['admin_username'] do
+mysql_database_user node['lamp']['database']['admin_username'] do
   connection     mysql_conn_info
   password       passwords['admin_password']
   database_name  node['lamp']['database']['dbname']
