@@ -6,14 +6,43 @@
 
 include_recipe 'lamp::default'
 
+# Flask and python
+package [ 'unzip', 'libapache2-mod-wsgi', 'python-pip', 'python-mysqldb', 'git' ]
+
+execute 'install-flask' do
+  command <<-EOF
+    pip install flask
+  EOF
+end
+
+# Get the AAR files
+git 'tmp/Awesome-Appliance-Repair' do
+  action :export
+  repository 'https://github.com/colincam/Awesome-Appliance-Repair.git'
+  not_if { ::File.exist?('/var/www/AAR') }
+end
+
+bash 'mv AAR' do
+  cwd '/tmp/Awesome-Appliance-Repair'
+  code <<-EOH
+    mv AAR /var/www/
+  EOH
+end
+
+# Site config
+httpd_config 'AAR-apache' do
+  source 'aar.conf.erb'
+end
+
+# Database config
 passwords = data_bag_item('passwords', 'mysql')
 
 # Create a path to SQL file in cache
-create_tables_script_path = ::File.join(Chef::Config[:file_cache_path], 'create_tables.sql')
+create_tables_script_path = ::File.join(Chef::Config[:file_cache_path], 'make_AARdb.sql')
 
 # Get the creation script
 cookbook_file create_tables_script_path do
-  source 'create-tables.sql'
+  source 'make_AARdb.sql'
 end
 
 # Seed the database with table and test data
