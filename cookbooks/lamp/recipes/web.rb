@@ -20,3 +20,13 @@ httpd_service 'default' do
   action [:create, :start]
   subscribes :restart, 'httpd_config[default]'
 end
+
+# PHP Stuff Starts Here
+httpd_module 'php5' do
+  instance 'default'
+end
+
+package 'php5-mysql' do
+  action :install
+  notifies :restart, 'httpd_service[default]'
+end
