@@ -31,7 +31,12 @@ end
 
 # Site config
 httpd_config 'AAR-apache' do
-  source 'aar.conf.erb'
+  source 'AAR-apache.conf'
+end
+
+httpd_service 'AAR-apache' do
+  action [:create, :start]
+  subscribes :restart, 'httpd_config[AAR-apache]'
 end
 
 # Database config
