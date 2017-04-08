@@ -18,6 +18,11 @@ mysql_service 'default' do
   action [:create, :start]
 end
 
+# Install the mysql2 Ruby gem.
+mysql2_chef_gem 'default' do
+  action :install
+end
+
 # Create mysql database instance
 mysql_conn_info = {
   :host     => '127.0.0.1',
@@ -30,7 +35,7 @@ mysql_database node['lamp']['database']['dbname'] do
   action :create
 end
 
-mysql_database_user 'disenfranchised' do
+mysql_database_user ['lamp']['database']['admin_username'] do
   connection mysql_conn_info
   password   passwords['admin_password']
   database_name node['lamp']['database']['dbname']
