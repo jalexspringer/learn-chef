@@ -23,7 +23,7 @@ git node['middleman']['install_dir'] do
 end
 
 ruby_runtime 'middleman' do
-  version '2.1'
+  action :install
 end
 
 bundle_install node['middleman']['install_dir'] do
