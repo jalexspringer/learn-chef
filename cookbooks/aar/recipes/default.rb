@@ -19,8 +19,10 @@ end
 
 # Get the AAR files
 git '/tmp/Awesome-Appliance-Repair' do
-  action :sync
+  action :export
   repository 'https://github.com/colincam/Awesome-Appliance-Repair.git'
+  notifies :run, 'bash[mv_ARR]', :immediately
+  not_if {File.exists?('/var/www/AAR')}
 end
 
 bash 'mv AAR' do
@@ -28,6 +30,7 @@ bash 'mv AAR' do
   code <<-EOH
     mv AAR /var/www/
   EOH
+  action :nothing
 end
 
 template '/var/www/AAR/AAR_config.py' do
