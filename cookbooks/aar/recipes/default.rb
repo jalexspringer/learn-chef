@@ -25,7 +25,7 @@ git '/tmp/Awesome-Appliance-Repair' do
   not_if {File.exists?('/var/www/AAR')}
 end
 
-bash 'mv AAR' do
+bash 'mv_AAR' do
   cwd '/tmp/Awesome-Appliance-Repair'
   code <<-EOH
     mv AAR /var/www/
