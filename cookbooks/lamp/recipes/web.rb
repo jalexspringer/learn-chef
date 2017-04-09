@@ -10,7 +10,7 @@
 # end
 
 # Site config
-templates '/etc/apache2/sites-enabled/AAR-apache.conf' do
+template '/etc/apache2/sites-enabled/AAR-apache.conf' do
   source 'AAR-apache.conf.erb'
 end
 
