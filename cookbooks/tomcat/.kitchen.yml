@@ -28,7 +28,6 @@ platforms:
       username: vagrant
       image_project: centos-cloud
       image_name: centos-7-v20170327
-      image_family: centos-7
 
 suites:
   - name: default

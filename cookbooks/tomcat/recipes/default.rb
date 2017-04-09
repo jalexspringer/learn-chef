@@ -75,5 +75,5 @@ execute 'daemon-reload' do
 end
 
 service 'tomcat' do
-  action [:start, :enable] 
+  action [:start, :enable]
 end
