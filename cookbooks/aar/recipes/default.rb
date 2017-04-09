@@ -35,16 +35,10 @@ bash 'mv_AAR' do
   not_if {File.exists?('/var/www/AAR')}
 end
 
-directory '/var/www/AAR' do
-  owner 'www-data'
-  group 'www-data'
-  recursive true
-end
-
-directory '/var/www/AAR/*' do
-  owner 'www-data'
-  group 'www-data'
-  recursive true
+execute "chown-data-www" do
+  command "chown -R www-data:www-data /var/www/AAR"
+  user "root"
+  action :run
 end
 
 template '/var/www/AAR/AAR_config.py' do
