@@ -5,6 +5,8 @@
 # Copyright:: 2017, The Authors, All Rights Reserved.
 include_recipe 'runit'
 
+package 'git'
+
 user 'middleman' do
   comment 'middleman ruby user'
   home node['middleman']['home']
