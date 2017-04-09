@@ -22,13 +22,21 @@ git node['middleman']['install_dir'] do
   action :sync
 end
 
-file "#node['middleman']['install_dir']/Gemfile.lock" do
-  action :delete
-end
+# file "#node['middleman']['install_dir']/Gemfile.lock" do
+#   user 'middleman'
+#   action :delete
+# end
 
-bundle_install node['middleman']['install_dir'] do
-  deployment false
-  user 'middleman'
+# bundle_install node['middleman']['install_dir'] do
+#   deployment false
+#   user 'middleman'
+# end
+
+bash 'bundle install' do
+  cwd node['middleman']['install_dir']
+  code <<-EOH
+    bundle install --no-deployment
+  EOH
 end
 
 runit_service "thin"
