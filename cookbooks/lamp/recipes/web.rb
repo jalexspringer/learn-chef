@@ -16,6 +16,7 @@ end
 
 # Install apache and start
 httpd_service 'default' do
+  mpm 'prefork'
   action [:create, :start]
   subscribes :restart, 'httpd_config[default]'
 end
