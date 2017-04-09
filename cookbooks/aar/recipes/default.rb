@@ -6,8 +6,10 @@
 
 include_recipe 'lamp::default'
 
+passwords = data_bag_item('passwords', 'mysql')
+
 # Flask and python
-package [ 'unzip', 'libapache2-mod-wsgi', 'python-pip', 'python-mysqldb', 'git' ]
+package [ 'libapache2-mod-wsgi', 'python-pip', 'python-mysqldb', 'git' ]
 
 execute 'install-flask' do
   command <<-EOF
@@ -29,6 +31,14 @@ bash 'mv AAR' do
   EOH
 end
 
+template '/var/www/AAR/AAR_config.py' do
+  source 'create_config.py.erb'
+  variables(
+    admin_pass: passwords['admin_password'],
+    secret_key: passwords['secret_key']
+  )
+end
+
 # Site config
 httpd_config 'AAR-apache' do
   source 'AAR-apache.conf'
@@ -40,7 +50,6 @@ httpd_service 'AAR-apache' do
 end
 
 # Database config
-passwords = data_bag_item('passwords', 'mysql')
 
 # Create a path to SQL file in cache
 create_tables_script_path = ::File.join(Chef::Config[:file_cache_path], 'make_AARdb.sql')
