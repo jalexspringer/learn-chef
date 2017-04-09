@@ -32,6 +32,7 @@ bash 'mv_AAR' do
     mv AAR /var/www/
   EOH
   action :nothing
+  not_if {File.exists?('/var/www/AAR')}
 end
 
 template '/var/www/AAR/AAR_config.py' do
