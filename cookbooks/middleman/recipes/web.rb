@@ -4,6 +4,10 @@
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
+httpd_module 'proxy' do
+  instance 'default'
+end
+
 httpd_module 'proxy_http' do
   instance 'default'
 end
