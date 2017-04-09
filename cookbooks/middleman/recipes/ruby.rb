@@ -45,8 +45,6 @@ bash 'bundle_install' do
   EOH
 end
 
-runit_service "thin"
-
 template '/etc/thin/blog.conf' do
   source 'blog.conf.erb'
   variables(
