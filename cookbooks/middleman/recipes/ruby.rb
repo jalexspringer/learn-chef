@@ -22,7 +22,7 @@ git node['middleman']['install_dir'] do
   action :sync
 end
 
-file '#node['middleman']['install_dir']/Gemfile.lock' do
+file "#node['middleman']['install_dir']/Gemfile.lock" do
   action :delete
 end
 
