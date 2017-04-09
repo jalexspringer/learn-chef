@@ -43,13 +43,13 @@ template '/var/www/AAR/AAR_config.py' do
 end
 
 # Site config
-httpd_config 'AAR-apache' do
+httpd_config 'default' do
   source 'AAR-apache.conf.erb'
 end
 
-httpd_service 'AAR-apache' do
+httpd_service 'default' do
   action [:create, :start]
-  subscribes :restart, 'httpd_config[AAR-apache]'
+  subscribes :restart, 'httpd_config[default]'
 end
 
 # Database config
