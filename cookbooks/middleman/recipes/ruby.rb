@@ -5,8 +5,34 @@
 # Copyright:: 2017, The Authors, All Rights Reserved.
 include_recipe 'runit'
 
-package ['git', 'ruby', 'ruby-dev']
+package ['build-essential', 'libssl-dev', 'libyaml-dev', 'libreadline-dev', 'openssl', 'curl', 'git-core', 'zlib1g-dev', 'bison', 'libxml2-dev', 'libxslt1-dev', 'libcurl4-openssl-dev', 'nodejs', 'libsqlite3-dev', 'sqlite3']
 
+remote_file "/tmp/ruby-2.1.3.tar.gz" do
+  source "ftp://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz"
+  owner "root"
+  group "root"
+  mode "0644"
+  action :create
+end
+
+bash "build ruby" do
+  user "root"
+  cwd "/tmp"
+  creates "/usr/bin/gem"
+  code <<-EOH
+    STATUS=0
+    tar xvzf ruby-2.1.3.tar.gz || STATUS=1
+    cd ruby-2.1.3 || STATUS=1
+     ./configure && make || STATUS=1
+     make install || STATUS=1
+    exit $STATUS
+  EOH
+end
+
+# Install Bundler
+gem_package 'bundler'
+
+# Create middleman user
 user 'middleman' do
   comment 'middleman ruby user'
   home node['middleman']['home']
@@ -22,25 +48,11 @@ git node['middleman']['install_dir'] do
   action :sync
 end
 
-# file "#node['middleman']['install_dir']/Gemfile.lock" do
-#   user 'middleman'
-#   action :delete
-# end
-
-# bundle_install node['middleman']['install_dir'] do
-#   deployment false
-#   user 'middleman'
-# end
-
-# Install Bundler
-gem_package 'bundler'
-
 bash 'bundle_install' do
   user 'middleman'
   cwd '/home/middleman/middleman-blog'
   code <<-EOH
-    bundle install
-    sudo thin install
+    bundle install --frozen --deployment --without=dev || STATUS=1
     sudo /usr/sbin/update-rc.d -f thin defaults
   EOH
 end
