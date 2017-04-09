@@ -68,3 +68,11 @@ execute "initialize #{node['lamp']['database']['dbname']} database" do
   command "mysql -h 127.0.0.1 -u #{node['lamp']['database']['admin_username']} -p#{passwords['admin_password']} -D #{node['lamp']['database']['dbname']} < #{create_tables_script_path}"
   not_if  "mysql -h 127.0.0.1 -u #{node['lamp']['database']['admin_username']} -p#{passwords['admin_password']} -D #{node['lamp']['database']['dbname']} -e 'describe customer;'"
 end
+
+# Restart apachectl
+bash "Restart Apache" do
+  user "root"
+  code <<-EOH
+  service httpd graceful
+  EOH
+end
