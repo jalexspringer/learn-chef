@@ -20,6 +20,10 @@ httpd_config 'default' do
   source 'blog.conf.erb'
 end
 
+template '/etc/apache2/sites-enabled/blog.conf' do
+  source 'blog.conf.erb'
+end
+
 httpd_service 'default' do
   action [:create, :start]
   subscribes :restart, 'httpd_config[default]'

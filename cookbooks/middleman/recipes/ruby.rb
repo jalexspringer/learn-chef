@@ -72,6 +72,10 @@ end
 
 template '/etc/thin/blog.conf' do
   source 'blog.conf.erb'
+end
+
+template '/etc/thin/blog.yml' do
+  source 'blog.yml.erb'
   variables(
     project_install_directory:  node['middleman']['install_dir']
   )
