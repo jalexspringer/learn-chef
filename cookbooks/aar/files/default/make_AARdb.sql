@@ -1,7 +1,4 @@
-CREATE DATABASE AARdb
-  DEFAULT CHARACTER SET utf8;
-
-USE AARdb;
+-- USE AARdb;
 
 CREATE TABLE `customer` (
     `cid` mediumint NOT NULL auto_increment,
