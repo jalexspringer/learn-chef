@@ -14,6 +14,10 @@ template '/etc/apache2/sites-enabled/AAR-apache.conf' do
   source 'AAR-apache.conf.erb'
 end
 
+httpd_module 'wsgi' do
+  instance 'default'
+end
+
 httpd_config 'default' do
   # source 'default.conf.erb'
   source 'AAR-apache.conf.erb'
@@ -26,9 +30,6 @@ httpd_service 'default' do
   subscribes :restart, 'httpd_config[default]'
 end
 
-httpd_module 'wsgi' do
-  instance 'default'
-end
 
 # package 'php5-mysql' do
 #   action :install
