@@ -1,0 +1,36 @@
+---
+driver:
+  name: gce
+  project: protean-bus-122701
+  zone: asia-east1-a
+  email: jalexspringer@gmail.com
+  tags:
+    - test-kitchen
+  service_account_scopes:
+    - devstorage.read_write
+    - userinfo.email
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+transport:
+  username: chefuser
+  ssh_key: /root/.ssh/google_compute_engine
+
+platforms:
+  - name: centos-7
+    driver:
+      image_project: centos-cloud
+      image_name: centos-7-v20170227
+
+suites:
+  - name: default
+    run_list:
+      - recipe[tomcat::default]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:

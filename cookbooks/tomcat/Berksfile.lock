@@ -1,0 +1,7 @@
+DEPENDENCIES
+  tomcat
+    path: .
+    metadata: true
+
+GRAPH
+  tomcat (0.2.0)

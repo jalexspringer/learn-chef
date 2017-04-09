@@ -1,0 +1,6 @@
+---
+last_error: Kitchen::ActionFailed
+server_name: tk-default-centos-7-54ea88
+hostname: 104.199.242.173
+zone: asia-east1-a
+last_action: create
