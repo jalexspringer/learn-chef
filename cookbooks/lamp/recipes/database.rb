@@ -40,6 +40,5 @@ mysql_database_user node['lamp']['database']['admin_username'] do
   password       passwords['admin_password']
   database_name  node['lamp']['database']['dbname']
   host           '127.0.0.1'
-  privileges     [:select,:update,:insert,:create,:delete]
   action         [:create, :grant]
 end
