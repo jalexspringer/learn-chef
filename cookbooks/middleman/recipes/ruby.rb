@@ -23,7 +23,6 @@ git node['middleman']['install_dir'] do
 end
 
 bundle_install node['middleman']['install_dir'] do
-  deployment true
   user 'middleman'
 end
 
