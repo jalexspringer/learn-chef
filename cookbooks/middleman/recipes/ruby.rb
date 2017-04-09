@@ -3,7 +3,6 @@
 # Recipe:: ruby
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
-include_recipe 'runit'
 
 package ['build-essential', 'libssl-dev', 'libyaml-dev', 'libreadline-dev', 'openssl', 'curl', 'git-core', 'zlib1g-dev', 'bison', 'libxml2-dev', 'libxslt1-dev', 'libcurl4-openssl-dev', 'nodejs', 'libsqlite3-dev', 'sqlite3']
 
@@ -31,14 +30,6 @@ end
 
 # Install Bundler
 gem_package 'bundler'
-
-# Create middleman user
-# user 'middleman' do
-#   comment 'middleman ruby user'
-#   home node['middleman']['home']
-#   gid 'users'
-#   action :create
-# end
 
 git node['middleman']['install_dir'] do
   repository 'https://github.com/learnchef/middleman-blog.git' 
