@@ -22,6 +22,10 @@ git node['middleman']['install_dir'] do
   action :sync
 end
 
+file '#node['middleman']['install_dir']/Gemfile.lock' do
+  action :delete
+end
+
 bundle_install node['middleman']['install_dir'] do
   deployment false
   user 'middleman'
