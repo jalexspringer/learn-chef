@@ -1,4 +1,4 @@
-CONNECTION_ARGS = {"host":"localhost", "user":'<%= node['lamp']['database']['admin_username'] %>', "passwd":"<%= @admin_pass %>", "db":"<%= node['lamp']['database']['dbname'] %>"}
+CONNECTION_ARGS = {"host":"127.0.0.1", "user":'<%= node['lamp']['database']['admin_username'] %>', "passwd":"<%= @admin_pass %>", "db":"<%= node['lamp']['database']['dbname'] %>"}
 
 SECRET_KEY = "<%= @secret_key %>"
 
