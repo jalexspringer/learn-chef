@@ -5,7 +5,7 @@
 # Copyright:: 2017, The Authors, All Rights Reserved.
 include_recipe 'runit'
 
-package 'git'
+package ['git', 'ruby', 'ruby-dev']
 
 user 'middleman' do
   comment 'middleman ruby user'
@@ -32,12 +32,33 @@ end
 #   user 'middleman'
 # end
 
-bash 'bundle install' do
-  cwd node['middleman']['install_dir']
+# Install Bundler
+gem_package 'bundler'
+
+bash 'bundle_install' do
+  user 'middleman'
+  cwd '/home/middleman/middleman-blog'
   code <<-EOH
-    bundle install --no-deployment
+    bundle update
+    bundle install
+    sudo thin install
+    sudo /usr/sbin/update-rc.d -f thin defaults
   EOH
 end
 
 runit_service "thin"
 
+template '/etc/thin/blog.conf' do
+  source 'blog.conf.erb'
+  variables(
+    project_install_directory:  node['middleman']['install_dir']
+  )
+end
+template '/etc/init.d/thin' do
+  source 'thin.erb'
+  variables(
+    home_directory:  node['middleman']['home']
+  )
+end
+
+runit_service "thin"
