@@ -23,11 +23,10 @@ transport:
     - ~/.ssh/google_compute_engine
 
 platforms:
-  - name: ubuntu-14.04
+  - name: centos-7
     driver:
-      username: ubuntu
-      image_project: ubuntu-os-cloud
-      image_family: ubuntu-1404-lts
+      image_project: centos-cloud
+      image_name: centos-7-v20170227
 
 suites:
   - name: default
