@@ -18,15 +18,17 @@ verifier:
   name: inspec
 
 transport:
-  username: chefuser
+  username: vagrant
   ssh_key:
     - ~/.ssh/google_compute_engine
 
 platforms:
   - name: centos-7
     driver:
+      username: vagrant
       image_project: centos-cloud
-      image_name: centos-7-v20170227
+      image_name: centos-7-v20170327
+      image_family: centos-7
 
 suites:
   - name: default
