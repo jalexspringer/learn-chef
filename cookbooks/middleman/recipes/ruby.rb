@@ -39,8 +39,8 @@ bash 'bundle_install' do
   user 'middleman'
   cwd '/home/middleman/middleman-blog'
   code <<-EOH
-    bundle update
-    bundle install
+    sudo bundle update
+    sudo bundle install
     sudo thin install
     sudo /usr/sbin/update-rc.d -f thin defaults
   EOH
