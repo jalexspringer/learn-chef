@@ -2,13 +2,14 @@
 driver:
   name: gce
   project: protean-bus-122701
-  zone: asia-east1-a
+  zone: us-east1-c
   email: jalexspringer@gmail.com
   tags:
     - test-kitchen
   service_account_scopes:
     - devstorage.read_write
     - userinfo.email
+  associate_public_ip: true
 
 provisioner:
   name: chef_zero
@@ -17,17 +18,20 @@ verifier:
   name: inspec
 
 transport:
-  username: chefuser
-  ssh_key: /root/.ssh/google_compute_engine
+  username: ubuntu
+  ssh_key:
+    - ~/.ssh/google_compute_engine
 
 platforms:
-  - name: centos-7
+  - name: ubuntu-14.04
     driver:
-      image_project: centos-cloud
-      image_name: centos-7-v20170227
+      username: ubuntu
+      image_project: ubuntu-os-cloud
+      image_family: ubuntu-1404-lts
 
 suites:
   - name: default
+    data_bags_path: ../lamp/test/fixtures/default/data_bags
     run_list:
       - recipe[tomcat::default]
     verifier:
