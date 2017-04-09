@@ -21,7 +21,8 @@ end
 git '/tmp/Awesome-Appliance-Repair' do
   action :export
   repository 'https://github.com/colincam/Awesome-Appliance-Repair.git'
-  notifies :run, 'bash[mv_ARR]', :immediately
+  # TODO Figure this thing out
+  # notifies :run, 'bash[mv_ARR]', :immediately
   not_if {File.exists?('/var/www/AAR')}
 end
 
