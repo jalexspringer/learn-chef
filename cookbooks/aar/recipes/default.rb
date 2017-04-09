@@ -35,6 +35,18 @@ bash 'mv_AAR' do
   not_if {File.exists?('/var/www/AAR')}
 end
 
+directory '/var/www/AAR' do
+  owner 'www-data'
+  group 'www-data'
+  recursive true
+end
+
+directory '/var/www/AAR/*' do
+  owner 'www-data'
+  group 'www-data'
+  recursive true
+end
+
 template '/var/www/AAR/AAR_config.py' do
   source 'create_config.py.erb'
   variables(
@@ -69,10 +81,3 @@ execute "initialize #{node['lamp']['database']['dbname']} database" do
   not_if  "mysql -h 127.0.0.1 -u #{node['lamp']['database']['admin_username']} -p#{passwords['admin_password']} -D #{node['lamp']['database']['dbname']} -e 'describe customer;'"
 end
 
-# Restart apachectl
-bash "Restart Apache" do
-  user "root"
-  code <<-EOH
-  sudo service apachectl graceful
-  EOH
-end
