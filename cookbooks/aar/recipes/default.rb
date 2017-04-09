@@ -40,7 +40,7 @@ end
 
 # Site config
 httpd_config 'AAR-apache' do
-  source 'AAR-apache.conf'
+  source 'AAR-apache.conf.erb'
 end
 
 httpd_service 'AAR-apache' do
@@ -61,5 +61,5 @@ end
 # Seed the database with table and test data
 execute "initialize #{node['lamp']['database']['dbname']} database" do
   command "mysql -h 127.0.0.1 -u #{node['lamp']['database']['admin_username']} -p#{passwords['admin_password']} -D #{node['lamp']['database']['dbname']} < #{create_tables_script_path}"
-  not_if  "mysql -h 127.0.0.1 -u #{node['lamp']['database']['admin_username']} -p#{passwords['admin_password']} -D #{node['lamp']['database']['dbname']} -e 'describe customers;'"
+  not_if  "mysql -h 127.0.0.1 -u #{node['lamp']['database']['admin_username']} -p#{passwords['admin_password']} -D #{node['lamp']['database']['dbname']} -e 'describe customer;'"
 end
