@@ -11,7 +11,8 @@
 
 # Site config
 httpd_config 'default' do
-  source 'default.conf.erb'
+  # source 'default.conf.erb'
+  source 'AAR-apache.conf.erb'
 end
 
 # Install apache and start
