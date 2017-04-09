@@ -33,24 +33,24 @@ end
 gem_package 'bundler'
 
 # Create middleman user
-user 'middleman' do
-  comment 'middleman ruby user'
-  home node['middleman']['home']
-  gid 'users'
-  action :create
-end
+# user 'middleman' do
+#   comment 'middleman ruby user'
+#   home node['middleman']['home']
+#   gid 'users'
+#   action :create
+# end
 
 git node['middleman']['install_dir'] do
   repository 'https://github.com/learnchef/middleman-blog.git' 
   reference 'master'
-  user 'middleman'
+  user 'ubuntu'
   group 'users'
   action :sync
 end
 
 bash 'bundle_install' do
-  user 'middleman'
-  cwd '/home/middleman/middleman-blog'
+  user 'ubuntu'
+  cwd '/home/ubuntu/middleman-blog'
   code <<-EOH
     bundle install --frozen --deployment --without=dev || STATUS=1
     sudo /usr/sbin/update-rc.d -f thin defaults
