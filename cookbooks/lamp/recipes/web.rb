@@ -5,9 +5,9 @@
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
 # Create the document root directory.
-directory node['lamp']['web']['document_root'] do
-  recursive true
-end
+# directory node['lamp']['web']['document_root'] do
+#   recursive true
+# end
 
 # Site config
 httpd_config 'default' do
