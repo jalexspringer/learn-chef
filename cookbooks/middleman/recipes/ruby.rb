@@ -52,7 +52,20 @@ bash 'bundle_install' do
   user 'ubuntu'
   cwd '/home/ubuntu/middleman-blog'
   code <<-EOH
-    bundle install --frozen --deployment --without=dev || STATUS=1
+    bundle install --no-deployment --frozen --without=dev || STATUS=1
+  EOH
+end
+
+bash 'thin_install' do
+  cwd '/home/ubuntu/middleman-blog'
+  code <<-EOH
+    thin install 
+  EOH
+end
+
+bash 'thin_defaults' do
+  cwd '/home/ubuntu/middleman-blog'
+  code <<-EOH
     sudo /usr/sbin/update-rc.d -f thin defaults
   EOH
 end
@@ -63,6 +76,7 @@ template '/etc/thin/blog.conf' do
     project_install_directory:  node['middleman']['install_dir']
   )
 end
+
 template '/etc/init.d/thin' do
   source 'thin.erb'
   variables(
@@ -70,4 +84,6 @@ template '/etc/init.d/thin' do
   )
 end
 
-runit_service "thin"
+service 'thin' do
+  action :restart
+end
