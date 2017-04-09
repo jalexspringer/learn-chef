@@ -73,6 +73,6 @@ end
 bash "Restart Apache" do
   user "root"
   code <<-EOH
-  service httpd graceful
+  sudo service apachectl graceful
   EOH
 end
