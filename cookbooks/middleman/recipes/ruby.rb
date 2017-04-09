@@ -22,13 +22,8 @@ git node['middleman']['install_dir'] do
   action :sync
 end
 
-ruby_runtime 'middleman' do
-  action :install
-end
-
 bundle_install node['middleman']['install_dir'] do
   deployment true
-  ruby 'middleman'
   user 'middleman'
 end
 
