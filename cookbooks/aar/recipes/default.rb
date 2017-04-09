@@ -18,10 +18,9 @@ execute 'install-flask' do
 end
 
 # Get the AAR files
-git '/tmp' do
-  action :export
+git '/tmp/Awesome-Appliance-Repair' do
+  action :sync
   repository 'https://github.com/colincam/Awesome-Appliance-Repair.git'
-  not_if { ::File.exist?('/var/www/AAR') }
 end
 
 bash 'mv AAR' do
