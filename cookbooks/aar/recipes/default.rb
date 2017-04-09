@@ -31,7 +31,7 @@ bash 'mv_AAR' do
   code <<-EOH
     mv AAR /var/www/
   EOH
-  action :nothing
+  # action :nothing
   not_if {File.exists?('/var/www/AAR')}
 end
 
