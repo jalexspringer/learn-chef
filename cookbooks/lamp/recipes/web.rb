@@ -10,9 +10,9 @@
 # end
 
 # Site config
-# template '/etc/apache2/sites-enabled/AAR-apache.conf' do
-#   source 'AAR-apache.conf.erb'
-# end
+template '/etc/apache2/sites-enabled/AAR-apache.conf' do
+  source 'AAR-apache.conf.erb'
+end
 
 httpd_config 'default' do
   # source 'default.conf.erb'
