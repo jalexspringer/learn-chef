@@ -48,7 +48,7 @@ Node: Centos7 instance on Google Cloud Compute Engine
 ### notes
 - Either I made the other ones harder than they needed to be (likely), or this one is just very simple.
 
-## AwesomeApplianceRepair - 104.196.210.253
+## AwesomeApplianceRepair - 104.196.194.240 
 
 ### setup
 Workstation: Centos7 vagrant box
