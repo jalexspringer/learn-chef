@@ -1,5 +1,5 @@
 #
-# Cookbook:: lamp_customers
+# Cookbook:: aar
 # Recipe:: default
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
@@ -48,16 +48,6 @@ template '/var/www/AAR/AAR_config.py' do
     secret_key: passwords['secret_key']
   )
 end
-
-# Site config
-# httpd_config 'default' do
-#   source 'AAR-apache.conf.erb'
-# end
-
-# httpd_service 'default' do
-#   action [:create, :start]
-#   subscribes :restart, 'httpd_config[default]'
-# end
 
 # Database config
 
