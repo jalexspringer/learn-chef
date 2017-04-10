@@ -31,6 +31,23 @@ Node: Ubuntu 12.04 instance on Google Cloud Compute Engine
 - User permission issues plagued me on this. Ended up using the ubuntu user that my gcloud login defaulted to. Need to create a middleman user for security reasons - most likely add ALL permissions to /etc/sudoer.d/ to make it smoother.
 - Cheating doesn't work :) - install the ruby package brings a 1.* version down and plays havoc with the bundle install. Alternatives - add the ppa and then download the right version. But why do that when you can build from source :p
 
+## MongoDB
+
+Workstation: Centos7 vagrant box
+
+Chef Server: Hosted Chef
+
+Node: Centos7 instance on Google Cloud Compute Engine
+
+### steps
+1. Check architecture - put appropriate config file in play
+2. Install mongodb
+3. Start the service
+4. turn on start on reboot (unnecessarily, I think.)
+
+### notes
+- Either I made the other ones harder than they needed to be (likely), or this one is just very simple.
+
 ## AwesomeApplianceRepair - 104.196.210.253
 
 ### setup
