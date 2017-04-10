@@ -13,7 +13,7 @@ Node: Ubuntu 12.04 instance on Google Cloud Compute Engine
 1. Install ChefDK on vagrant box (workstation)
 2. Configure Chef Server, get keys and create knife config on workstation
 3. Generate cookbook 'middleman' on workstation
-7. Write up that default, web, ruby recipes, testing in Test Kitchen along the way.
+7. Write up them default, web, ruby recipes, testing in Test Kitchen along the way.
 
 ### web recipe - httpd
 1. Install httpd modules - proxy, proxy_http, rewrite
