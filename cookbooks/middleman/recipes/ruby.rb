@@ -32,7 +32,7 @@ end
 gem_package 'bundler'
 
 git node['middleman']['install_dir'] do
-  repository 'https://github.com/learnchef/middleman-blog.git' 
+  repository 'https://github.com/learnchef/middleman-blog.git'
   reference 'master'
   user 'ubuntu'
   group 'users'

@@ -19,11 +19,10 @@ end
 
 # Get the AAR files
 git '/tmp/Awesome-Appliance-Repair' do
-  action :export
+  action :sync
   repository 'https://github.com/colincam/Awesome-Appliance-Repair.git'
   # TODO Figure this thing out
-  # notifies :run, 'bash[mv_ARR]', :immediately
-  not_if {File.exists?('/var/www/AAR')}
+  notifies :run, 'bash[mv_ARR]', :immediately
 end
 
 bash 'mv_AAR' do
@@ -31,7 +30,7 @@ bash 'mv_AAR' do
   code <<-EOH
     mv AAR /var/www/
   EOH
-  # action :nothing
+  action :nothing
   not_if {File.exists?('/var/www/AAR')}
 end
 
@@ -50,7 +49,6 @@ template '/var/www/AAR/AAR_config.py' do
 end
 
 # Database config
-
 # Create a path to SQL file in cache
 create_tables_script_path = ::File.join(Chef::Config[:file_cache_path], 'make_AARdb.sql')
 
